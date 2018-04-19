@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="800px"
+              android:layout_height="350px">
+
+
+    <Button
+        android:id="@+id/btnCAQ"
+        android:layout_width="265px"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:drawableTop="@drawable/app_caq"
+        android:text="CAQ"
+        android:textSize="20px"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/btnVHA"
+        android:layout_width="265px"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:drawableTop="@drawable/app_vha"
+        android:text="VHA"
+        android:textSize="20px"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/btnApp"
+        android:layout_width="265px"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/btnVHA"
+        android:layout_centerVertical="true"
+        android:drawableTop="@drawable/app_web_app"
+        android:text="App"
+        android:textSize="20px"
+        android:textAllCaps="false"/>
+
+</RelativeLayout>

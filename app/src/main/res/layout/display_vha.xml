@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="800px"
+                android:layout_height="350px">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/layoutVehicle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/ivVehicle"
+            android:layout_width="0px"
+            android:layout_height="0px"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="22px"
+            android:layout_marginEnd="60px"
+            android:layout_marginStart="60px"
+            android:layout_marginTop="22px"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/vha_vehicle"
+            />
+
+        <ImageButton
+            android:id="@+id/btnWarningEngine"
+            android:layout_width="56px"
+            android:layout_height="56px"
+            android:layout_marginStart="128px"
+            android:background="#00000000"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.44"
+            app:srcCompat="@drawable/vha_warning"/>
+
+        <ImageButton
+            android:id="@+id/btnWarningTire"
+            android:layout_width="56px"
+            android:layout_height="56px"
+            android:layout_marginBottom="32px"
+            android:layout_marginEnd="0px"
+            android:layout_marginStart="10px"
+            android:background="#00000000"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.212"
+            app:layout_constraintStart_toEndOf="@+id/layoutMark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/vha_warning"/>
+
+        <ImageButton
+            android:id="@+id/btnWarningSteer"
+            android:layout_width="56px"
+            android:layout_height="56px"
+            android:layout_marginStart="300px"
+            android:background="#00000000"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.664"
+            app:srcCompat="@drawable/vha_warning"/>
+
+        <ImageButton
+            android:id="@+id/btnWarningExhaust"
+            android:layout_width="56px"
+            android:layout_height="56px"
+            android:layout_marginStart="600px"
+            android:background="#00000000"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.216"
+            app:srcCompat="@drawable/vha_warning"/>
+
+        <ImageButton
+            android:id="@+id/btnWarningFuel"
+            android:layout_width="56px"
+            android:layout_height="56px"
+            android:layout_marginStart="560px"
+            android:background="#00000000"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.048"
+            app:srcCompat="@drawable/vha_warning"/>
+
+
+        <RelativeLayout
+            android:id="@+id/layoutMark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16px"
+            android:layout_marginStart="32px"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/ivVehicle"
+            app:layout_constraintEnd_toStartOf="@+id/ivVehicle"
+            app:layout_constraintStart_toStartOf="parent">
+
+
+            <ImageButton
+                android:id="@+id/btnWarning"
+                android:layout_width="56px"
+                android:layout_height="56px"
+                android:background="#00000000"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/vha_warning_mark"/>
+
+
+            <TextView
+                android:id="@+id/tvCount"
+                android:layout_width="56px"
+                android:layout_height="56px"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="#FFFF0000"
+                android:textSize="26px"/>
+
+
+        </RelativeLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/layoutVehicleMsg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#E0000000"
+        android:visibility="invisible"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/listViewMsg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10px"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="right"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/ivOK"
+                android:layout_width="56px"
+                android:layout_height="56px"
+                android:layout_marginBottom="15px"
+                android:layout_marginRight="15px"
+                app:srcCompat="@drawable/ok"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>
