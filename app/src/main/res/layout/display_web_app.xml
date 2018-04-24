@@ -1,98 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="800px"
-              android:layout_height="350px"
-              android:layout_marginTop="30px"
-              android:orientation="vertical">
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="800px"
+    android:layout_height="350px"
+    android:id="@+id/main_layout"
+    android:background="@drawable/background"
+    tools:openDrawer="left">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_horizontal">
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_marginTop="30px"
+                  android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btnWeather"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableTop="@drawable/app_weather"
-            android:text="Weather"
-            android:textAllCaps="false"
-            android:textSize="20px"/>
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
 
-        <Button
-            android:id="@+id/btnDianping"
-            android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/btnWeather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/app_weather"
+                android:text="Weather"
+                android:textAllCaps="false"
+                android:textSize="20px"/>
+
+            <Button
+                android:id="@+id/btnDianping"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/app_dianping"
+                android:text="Dian Ping"
+                android:textAllCaps="false"
+                android:textSize="20px"/>
+
+
+            <Button
+                android:id="@+id/btnCtrip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/app_ctrip"
+                android:text="Ctrip"
+                android:textAllCaps="false"
+                android:textSize="20px"/>
+
+            <Button
+                android:id="@+id/btnBaiduMap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/app_map"
+                android:text="Map"
+                android:textAllCaps="false"
+                android:textSize="20px"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableTop="@drawable/app_dianping"
-            android:text="Dian Ping"
-            android:textAllCaps="false"
-            android:textSize="20px"/>
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
 
+            <Button
+                android:id="@+id/btnFM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/app_fm"
+                android:text="FM"
+                android:textAllCaps="false"
+                android:textSize="20px"/>
 
-        <Button
-            android:id="@+id/btnCtrip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableTop="@drawable/app_ctrip"
-            android:text="Ctrip"
-            android:textAllCaps="false"
-            android:textSize="20px"/>
+            <Button
+                android:id="@+id/btnQQ"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/app_qq"
+                android:text="QQ"
+                android:textAllCaps="false"
+                android:textSize="20px"/>
 
-        <Button
-            android:id="@+id/btnBaiduMap"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableTop="@drawable/app_map"
-            android:text="Map"
-            android:textAllCaps="false"
-            android:textSize="20px"/>
+            <Button
+                android:id="@+id/btnStock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/app_stock"
+                android:text="Stock"
+                android:textAllCaps="false"
+                android:textSize="20px"/>
+
+            <Button
+                android:id="@+id/btnBili"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/app_bilibili"
+                android:text="Bilibili"
+                android:textAllCaps="false"
+                android:textSize="20px"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 
+    <include layout="@layout/main_menu"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_horizontal">
-
-        <Button
-            android:id="@+id/btnFM"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableTop="@drawable/app_fm"
-            android:text="FM"
-            android:textAllCaps="false"
-            android:textSize="20px"/>
-
-        <Button
-            android:id="@+id/btnQQ"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableTop="@drawable/app_qq"
-            android:text="QQ"
-            android:textAllCaps="false"
-            android:textSize="20px"/>
-
-        <Button
-            android:id="@+id/btnStock"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableTop="@drawable/app_stock"
-            android:text="Stock"
-            android:textAllCaps="false"
-            android:textSize="20px"/>
-
-        <Button
-            android:id="@+id/btnBili"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableTop="@drawable/app_bilibili"
-            android:text="Bilibili"
-            android:textAllCaps="false"
-            android:textSize="20px"/>
-
-    </LinearLayout>
-
-</LinearLayout>
+</android.support.v4.widget.DrawerLayout>

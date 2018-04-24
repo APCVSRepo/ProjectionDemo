@@ -3,6 +3,8 @@ package demo.projection.ford.com.projectiondemo.display;
 import android.content.Intent;
 import android.net.Uri;
 import android.net.http.SslError;
+import android.view.MotionEvent;
+import android.view.View;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -15,7 +17,7 @@ import demo.projection.ford.com.projectiondemo.R;
  * Created by leon on 2018/4/3.
  */
 
-public class WebBaseDisplayView extends DisplayView
+public class WebBaseDisplayView extends DisplayView implements View.OnTouchListener
 {
     private WebView mWbContent;
     private String mURL;
@@ -55,7 +57,7 @@ public class WebBaseDisplayView extends DisplayView
 
     public WebBaseDisplayView(ProjectionDisplay projectionDisplay, String url)
     {
-        super(projectionDisplay, true);
+        super(projectionDisplay);
         mURL = url;
     }
 
@@ -89,12 +91,18 @@ public class WebBaseDisplayView extends DisplayView
 
         mWbContent.setWebViewClient(mWbClient);
         mWbContent.loadUrl(mURL);
-//        mWbContent.setInitialScale(50);
+        //        mWbContent.setInitialScale(50);
     }
 
     @Override
     public void destroy()
     {
         super.destroy();
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event)
+    {
+        return super.onTouch(v, event);
     }
 }

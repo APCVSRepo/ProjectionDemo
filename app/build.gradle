@@ -16,6 +16,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildToolsVersion '27.0.3'
 }
 
 
@@ -26,16 +27,16 @@ repositories {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-
-    compile ('com.smartdevicelink:bson_java_port:1.0.0@aar'){
+    compile('com.smartdevicelink:bson_java_port:1.0.0@aar') {
         transitive = true
     }
     compile(name: 'applink_security_lib', ext: 'aar')
     compile(name: 'sdl_android_lib', ext: 'aar')
+    implementation 'com.android.support:design:26.1.0'
 }

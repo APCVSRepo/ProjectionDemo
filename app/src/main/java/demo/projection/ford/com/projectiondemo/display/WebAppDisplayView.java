@@ -59,7 +59,7 @@ public class WebAppDisplayView extends DisplayView implements View.OnTouchListen
 
     public WebAppDisplayView(ProjectionDisplay projectionDisplay)
     {
-        super(projectionDisplay, true);
+        super(projectionDisplay);
     }
 
     @Override
@@ -71,33 +71,33 @@ public class WebAppDisplayView extends DisplayView implements View.OnTouchListen
             {
             case R.id.btnCtrip:
                 launch(ProjectionDisplay.DisplayType.WEB_CRIP);
-                break;
+                return true;
             case R.id.btnDianping:
                 launch(ProjectionDisplay.DisplayType.WEB_DIANPING);
-                break;
+                return true;
             case R.id.btnWeather:
                 launch(ProjectionDisplay.DisplayType.WEB_WEATHER);
-                break;
+                return true;
             case R.id.btnBaiduMap:
                 launch(ProjectionDisplay.DisplayType.WEB_MAP);
-                break;
+                return true;
             case R.id.btnFM:
                 launch(ProjectionDisplay.DisplayType.WEB_FM);
-                break;
+                return true;
             case R.id.btnStock:
                 launch(ProjectionDisplay.DisplayType.WEB_STOCK);
-                break;
+                return true;
             case R.id.btnQQ:
                 launch(ProjectionDisplay.DisplayType.WEB_QQ);
-                break;
+                return true;
             case R.id.btnBili:
                 launch(ProjectionDisplay.DisplayType.WEB_BILI);
-                break;
+                return true;
             default:
                 break;
             }
         }
 
-        return false;
+        return super.onTouch(v, event);
     }
 }

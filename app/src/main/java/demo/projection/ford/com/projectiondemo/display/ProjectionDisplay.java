@@ -1,9 +1,7 @@
 package demo.projection.ford.com.projectiondemo.display;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.view.Display;
 
 import com.smartdevicelink.streaming.video.SdlRemoteDisplay;
@@ -18,7 +16,6 @@ public class ProjectionDisplay extends SdlRemoteDisplay
 {
     public enum DisplayType
     {
-        Main,
         CAQ,
         VHA,
         WEB_APP,
@@ -62,21 +59,24 @@ public class ProjectionDisplay extends SdlRemoteDisplay
         return mCurDisplay;
     }
 
+    public DisplayType getCurrentDisplayType()
+    {
+        return mDisplayStack.peek();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
 
         mDisplayStack = new Stack<>();
-        launchDisplay(DisplayType.Main);
+        launchDisplay(DisplayType.CAQ);
     }
 
     private DisplayView createDisplay(DisplayType type)
     {
         switch(type)
         {
-        case Main:
-            return new MainDisplayView(this);
         case CAQ:
             return new CAQDisplayView(this);
         case VHA:

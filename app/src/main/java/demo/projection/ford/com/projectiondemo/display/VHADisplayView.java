@@ -37,7 +37,7 @@ public class VHADisplayView extends DisplayView implements View.OnTouchListener
     private ImageButton mBtnWarningFuel;
     private ImageButton mBtnWarningMark;
     private RelativeLayout mLayoutMark;
-    private TextView mTvCount;
+    private TextView mTvWarning;
     private View mVehicleView;
     private View mVehicleMsgView;
     private ListView mMsgListView;
@@ -78,7 +78,7 @@ public class VHADisplayView extends DisplayView implements View.OnTouchListener
 
     public VHADisplayView(ProjectionDisplay projectionDisplay)
     {
-        super(projectionDisplay, true);
+        super(projectionDisplay);
 
         mFontSheepSans = Typeface.createFromAsset(getContext().getAssets(), "font/sheep-sans.ttf");
         mFontOstrichSans = Typeface.createFromAsset(getContext().getAssets(), "font/ostrich-sans-rounded.ttf");
@@ -118,7 +118,7 @@ public class VHADisplayView extends DisplayView implements View.OnTouchListener
         mBtnWarningFuel = findViewById(R.id.btnWarningFuel);
         mBtnWarningMark = findViewById(R.id.btnWarning);
         mLayoutMark = findViewById(R.id.layoutMark);
-        mTvCount = findViewById(R.id.tvCount);
+        mTvWarning = findViewById(R.id.tvWarning);
 
         mVehicleView = findViewById(R.id.layoutVehicle);
         mVehicleMsgView = findViewById(R.id.layoutVehicleMsg);
@@ -132,6 +132,7 @@ public class VHADisplayView extends DisplayView implements View.OnTouchListener
         mBtnWarningFuel.setOnTouchListener(this);
         mBtnWarningMark.setOnTouchListener(this);
         mIvOK.setOnTouchListener(this);
+        mIvVehicle.setOnTouchListener(this);
 
         // For SDL bug. orz...
         mBtnWarningEngine.setImageResource(R.drawable.vha_warning);
@@ -190,7 +191,7 @@ public class VHADisplayView extends DisplayView implements View.OnTouchListener
 
         if (count > 0)
         {
-            mTvCount.setText(Integer.toString(count));
+            mTvWarning.setText("Alert:" + count);
             mLayoutMark.setVisibility(View.VISIBLE);
         }
         else
@@ -233,27 +234,27 @@ public class VHADisplayView extends DisplayView implements View.OnTouchListener
             {
             case R.id.ivOK:
                 showVehicleMsg(false);
-                break;
+                return true;
             case R.id.btnWarningEngine:
                 v.startAnimation(mVHAWarningPopupAnimation);
                 mCurMsgList = mMsgMap.get(Utils.VHAMsgType.ENGINE);
-                break;
+                return true;
             case R.id.btnWarningExhaust:
                 v.startAnimation(mVHAWarningPopupAnimation);
                 mCurMsgList = mMsgMap.get(Utils.VHAMsgType.EXHAUST);
-                break;
+                return true;
             case R.id.btnWarningSteer:
                 v.startAnimation(mVHAWarningPopupAnimation);
                 mCurMsgList = mMsgMap.get(Utils.VHAMsgType.STEER);
-                break;
+                return true;
             case R.id.btnWarningTire:
                 v.startAnimation(mVHAWarningPopupAnimation);
                 mCurMsgList = mMsgMap.get(Utils.VHAMsgType.TIRE);
-                break;
+                return true;
             case R.id.btnWarningFuel:
                 v.startAnimation(mVHAWarningPopupAnimation);
                 mCurMsgList = mMsgMap.get(Utils.VHAMsgType.FUEL);
-                break;
+                return true;
             case R.id.btnWarning:
                 mCurMsgList = new ArrayList<>();
                 for(List one : mMsgMap.values())
@@ -261,13 +262,16 @@ public class VHADisplayView extends DisplayView implements View.OnTouchListener
                     mCurMsgList.addAll(one);
                 }
                 showVehicleMsg(true);
-                break;
+                return true;
+            case R.id.ivVehicle:
+                showDrawer();
+                return true;
             default:
                 break;
             }
         }
 
-        return false;
+        return super.onTouch(v, event);
     }
 
 

@@ -36,7 +36,7 @@ public class CAQDisplayView extends DisplayView implements View.OnTouchListener
 
     public CAQDisplayView(ProjectionDisplay projectionDisplay)
     {
-        super(projectionDisplay, true);
+        super(projectionDisplay);
     }
 
     @Override
@@ -74,21 +74,7 @@ public class CAQDisplayView extends DisplayView implements View.OnTouchListener
     @Override
     public boolean onTouch(View v, MotionEvent event)
     {
-        onDoubleTap(event);
-
-        if (event.getAction() == MotionEvent.ACTION_DOWN)
-        {
-            switch(v.getId())
-            {
-            case R.id.ivVehicle:
-                break;
-            default:
-                break;
-            }
-        }
-
-
-        return false;
+        return super.onTouch(v, event);
     }
 
 
