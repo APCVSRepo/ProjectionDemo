@@ -1,5 +1,7 @@
 package demo.projection.ford.com.projectiondemo.display;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
@@ -17,6 +19,7 @@ import demo.projection.ford.com.projectiondemo.MainActivity;
 import demo.projection.ford.com.projectiondemo.R;
 import demo.projection.ford.com.projectiondemo.layout.SdlAQILayout;
 import demo.projection.ford.com.projectiondemo.layout.SdlAQILayoutCrystal;
+import demo.projection.ford.com.projectiondemo.layout.SdlAQILayoutMeter;
 
 /**
  * Created by leon on 2018/3/9.
@@ -32,7 +35,18 @@ public class CAQDisplayView extends DisplayView implements View.OnTouchListener
     private int mCurInnerAQI = 0;
     private int mCurOuterAQI = 0;
     private SdlAQILayout.WeatherInfo mWeatherInfo = null;
+    private static boolean mCrystalUI = true;
 
+    public static class UIBroadcastReceiver extends BroadcastReceiver
+    {
+        public static final String ACTION = "demo.projection.ford.com.receiver.caqui";
+
+        @Override
+        public void onReceive(Context context, Intent intent)
+        {
+            CAQDisplayView.mCrystalUI = ! CAQDisplayView.mCrystalUI;
+        }
+    }
 
     public CAQDisplayView(ProjectionDisplay projectionDisplay)
     {
@@ -126,7 +140,13 @@ public class CAQDisplayView extends DisplayView implements View.OnTouchListener
         getContext().sendBroadcast(intent);
 
         // Update UI
-        SdlAQILayout mLayout = SdlAQILayoutCrystal.getInstance(getContext());
+        SdlAQILayout mLayout = null;
+
+        if (mCrystalUI)
+            mLayout = SdlAQILayoutCrystal.getInstance(getContext());
+        else
+            mLayout = SdlAQILayoutMeter.getInstance(getContext());
+
         mImageView.setImageBitmap(mLayout.update(inner, outer, weatherInfo));
     }
 

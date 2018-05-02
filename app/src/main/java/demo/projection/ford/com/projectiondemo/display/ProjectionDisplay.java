@@ -1,7 +1,9 @@
 package demo.projection.ford.com.projectiondemo.display;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.Display;
 
 import com.smartdevicelink.streaming.video.SdlRemoteDisplay;

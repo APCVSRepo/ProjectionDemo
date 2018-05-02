@@ -97,15 +97,20 @@ import com.smartdevicelink.transport.USBTransportConfig;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 
+import demo.projection.ford.com.projectiondemo.MainActivity;
+import demo.projection.ford.com.projectiondemo.display.CAQDisplayView;
 import demo.projection.ford.com.projectiondemo.display.ProjectionDisplay;
 
 
 public class MySdlService extends Service implements IProxyListenerALM
 {
 	private static final int CMD_ID_SWITCH = 100;
+	private static final String[] CMD_NAME_SWITCH = {"skin change"};
+
 	private SdlProxyALM mProxy = null;
 
 	private static final int ID_BTN_YES = 101;
@@ -260,6 +265,15 @@ public class MySdlService extends Service implements IProxyListenerALM
 		case HMI_FULL:
 			if (status.getFirstRun())
 			{
+				try
+				{
+					mProxy.addCommand(CMD_ID_SWITCH, new Vector<>(Arrays.asList(CMD_NAME_SWITCH)), 0);
+				}
+				catch (SdlException e)
+				{
+					e.printStackTrace();
+				}
+
 				final int SDL_DPI = 240;
 				final int SDL_FPS = 30;
 				final int SDL_BITRATE = 1024*1024*3;
@@ -340,6 +354,8 @@ public class MySdlService extends Service implements IProxyListenerALM
 		switch(response.getCmdID())
 		{
 		case CMD_ID_SWITCH:
+			Intent intent = new Intent(CAQDisplayView.UIBroadcastReceiver.ACTION);
+			sendBroadcast(intent);
 			break;
 		default:
 			break;

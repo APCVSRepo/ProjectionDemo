@@ -58,6 +58,11 @@
             </intent-filter>
         </receiver>
 
+        <receiver android:name=".display.CAQDisplayView$UIBroadcastReceiver">
+            <intent-filter>
+                <action android:name="demo.projection.ford.com.receiver.caqui" />
+            </intent-filter>
+        </receiver>
 
     </application>
 
