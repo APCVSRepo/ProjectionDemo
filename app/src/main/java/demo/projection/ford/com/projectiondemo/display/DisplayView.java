@@ -3,20 +3,30 @@ package demo.projection.ford.com.projectiondemo.display;
 import android.content.Context;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import demo.projection.ford.com.projectiondemo.R;
+import demo.projection.ford.com.projectiondemo.display.input.KeyboardUtil;
 
 /**
  * Created by leon on 2018/3/22.
  */
 
-public abstract class DisplayView implements View.OnTouchListener
+public abstract class DisplayView implements View.OnTouchListener, KeyboardUtil.OnKeyListener
 {
     private ProjectionDisplay mProjectionDisplay;
     private MotionEvent mPrevMotionEvent = null;
     private DrawerLayout mMainLayout = null;
+    private RelativeLayout mInputLayout = null;
+    private EditText mEtInput = null;
+    private KeyboardUtil mKeyboardUtil = null;
 
     public DisplayView(ProjectionDisplay projectionDisplay)
     {
@@ -32,12 +42,17 @@ public abstract class DisplayView implements View.OnTouchListener
     {
         setContentView(getId());
 
+        mInputLayout = findViewById(R.id.layoutInput);
+        mEtInput = findViewById(R.id.etInput);
+        mEtInput.setOnTouchListener(this);
+
         mMainLayout = findViewById(R.id.main_layout);
         mMainLayout.setOnTouchListener(this);
-
         findViewById(R.id.btnCAQ).setOnTouchListener(this);
         findViewById(R.id.btnVHA).setOnTouchListener(this);
         findViewById(R.id.btnApp).setOnTouchListener(this);
+
+        mKeyboardUtil =  new KeyboardUtil(findViewById(R.id.keyboard_view), getContext(), mEtInput, this);
     }
 
     public void destroy()
@@ -104,7 +119,6 @@ public abstract class DisplayView implements View.OnTouchListener
         }
 
         return false;
-
     }
 
     @Override
@@ -126,6 +140,9 @@ public abstract class DisplayView implements View.OnTouchListener
                 launch(ProjectionDisplay.DisplayType.WEB_APP);
                 mMainLayout.closeDrawer(Gravity.LEFT, true);
                 return true;
+            case R.id.etInput:
+//                mKeyboardUtil.showKeyboard();
+                return true;
             case R.id.main_layout:
             default:
                 showDrawer();
@@ -136,6 +153,12 @@ public abstract class DisplayView implements View.OnTouchListener
         return false;
     }
 
+    @Override
+    public void OnKeyDone(String value)
+    {
+        hideKeyboard();
+    }
+
 
     protected void showDrawer()
     {
@@ -143,6 +166,18 @@ public abstract class DisplayView implements View.OnTouchListener
             mMainLayout.closeDrawer(Gravity.LEFT, true);
         else
             mMainLayout.openDrawer(Gravity.LEFT, true);
-
     }
+
+    protected void showKeyboard()
+    {
+        mInputLayout.setVisibility(View.VISIBLE);
+        mKeyboardUtil.showKeyboard();
+    }
+
+    protected  void hideKeyboard()
+    {
+        mKeyboardUtil.hideKeyboard();
+        mInputLayout.setVisibility(View.INVISIBLE);
+    }
+
 }

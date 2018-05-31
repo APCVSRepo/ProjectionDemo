@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             break;
         case R.id.btnVHA:
             if (displayView instanceof VHADisplayView)
-                ((VHADisplayView) displayView).shuffleVHAMsg();;
+                ((VHADisplayView) displayView).shuffleVHAMsg();
             break;
         default:
             break;

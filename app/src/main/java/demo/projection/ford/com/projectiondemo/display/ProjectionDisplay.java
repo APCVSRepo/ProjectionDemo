@@ -48,8 +48,6 @@ public class ProjectionDisplay extends SdlRemoteDisplay
 //        mInstance = this;
 //    }
 
-
-
     public ProjectionDisplay(Context context, Display display)
     {
         super(context, display);
@@ -73,6 +71,8 @@ public class ProjectionDisplay extends SdlRemoteDisplay
 
         mDisplayStack = new Stack<>();
         launchDisplay(DisplayType.CAQ);
+//        launchDisplay(DisplayType.WEB_CRIP);
+
     }
 
     private DisplayView createDisplay(DisplayType type)

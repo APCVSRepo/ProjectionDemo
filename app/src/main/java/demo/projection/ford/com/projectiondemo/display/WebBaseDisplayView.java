@@ -1,64 +1,57 @@
 package demo.projection.ford.com.projectiondemo.display;
 
-import android.content.Intent;
-import android.net.Uri;
-import android.net.http.SslError;
+import android.os.Handler;
+import android.os.Message;
 import android.view.MotionEvent;
 import android.view.View;
-import android.webkit.SslErrorHandler;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
+import android.webkit.JavascriptInterface;
+
 
 import demo.projection.ford.com.projectiondemo.R;
+import demo.projection.ford.com.projectiondemo.Utils;
+import demo.projection.ford.com.projectiondemo.display.web.H5WebView;
 
 /**
  * Created by leon on 2018/4/3.
  */
 
-public class WebBaseDisplayView extends DisplayView implements View.OnTouchListener
+public class WebBaseDisplayView extends DisplayView implements View.OnTouchListener, H5WebView.OnPageListener
 {
-    private WebView mWbContent;
+    private H5WebView mWebView;
+    private String mOnInputJs;
+    private String mSetValueJs;
     private String mURL;
-    private final WebViewClient mWbClient = new WebViewClient()
+    private String mJsID;
+
+
+    private Handler mUIHandler = new Handler()
     {
         @Override
-        public boolean shouldOverrideUrlLoading(WebView view, String url)
+        public void handleMessage(Message msg)
         {
-            if (url == null)
-                return true;
-
-            if (!url.startsWith("http://") && !url.startsWith("https://"))
-                return true;
-
-            view.loadUrl(url);
-            return true;
-        }
-
-        @Override
-        public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error)
-        {
-            handler.proceed();
-        }
-
-        @Override
-        public void onReceivedError(WebView view, int errorCode, String description, String failingUrl)
-        {
-            super.onReceivedError(view, errorCode, description, failingUrl);
-        }
-
-        @Override
-        public void onPageFinished(WebView view, String url)
-        {
-            super.onPageFinished(view, url);
+            showKeyboard();
+            super.handleMessage(msg);
         }
     };
+
+    public class JSCallback
+    {
+        @JavascriptInterface
+        public void onInput(String id)
+        {
+            mJsID = id;
+            mUIHandler.sendEmptyMessage(0);
+        }
+    }
+
 
     public WebBaseDisplayView(ProjectionDisplay projectionDisplay, String url)
     {
         super(projectionDisplay);
         mURL = url;
+
+        mOnInputJs = "javascript:" + Utils.getAssetsFileAsText(getContext(), "js/inject.onInput.js");
+        mSetValueJs = "javascript:" + Utils.getAssetsFileAsText(getContext(), "js/inject.setValue.js") + "\ninject_setValue(\"%s\");";
     }
 
     @Override
@@ -72,26 +65,13 @@ public class WebBaseDisplayView extends DisplayView implements View.OnTouchListe
     {
         super.create();
 
-        mWbContent = findViewById(R.id.wvContent);
+        mWebView = findViewById(R.id.wvContent);
+        mWebView.setOnTouchListener(this);
 
-        WebSettings ws = mWbContent.getSettings();
-        ws.setJavaScriptEnabled(true);
-        ws.setAllowFileAccess(true);
-        ws.setDatabaseEnabled(true);
-        ws.setDomStorageEnabled(true);
-        ws.setSaveFormData(false);
-        ws.setAppCacheEnabled(true);
-        ws.setCacheMode(WebSettings.LOAD_DEFAULT);
-        ws.setLoadWithOverviewMode(true);
-        ws.setUseWideViewPort(true);
-        ws.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-        ws.setSupportZoom(false);
-        //        ws.setBuiltInZoomControls(true);
-
-
-        mWbContent.setWebViewClient(mWbClient);
-        mWbContent.loadUrl(mURL);
-        //        mWbContent.setInitialScale(50);
+        mWebView.loadUrl(mURL);
+        mWebView.requestFocus(View.FOCUS_DOWN);
+        mWebView.setOnPageListener(this);
+        mWebView.addJavascriptInterface(new JSCallback(), "callback");
     }
 
     @Override
@@ -103,6 +83,26 @@ public class WebBaseDisplayView extends DisplayView implements View.OnTouchListe
     @Override
     public boolean onTouch(View v, MotionEvent event)
     {
-        return super.onTouch(v, event);
+        if (v.getId() == R.id.wvContent)
+        {
+            return mWebView.onTouchEvent(event);
+        }
+        else
+        {
+            return super.onTouch(v, event);
+        }
+    }
+
+    @Override
+    public void OnKeyDone(String value)
+    {
+        super.OnKeyDone(value);
+        mWebView.evaluateJavascript(String.format(mSetValueJs, value),null);
+    }
+
+    @Override
+    public void onPageFinished()
+    {
+        mWebView.evaluateJavascript(mOnInputJs, null);
     }
 }

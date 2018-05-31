@@ -1,5 +1,9 @@
 package demo.projection.ford.com.projectiondemo;
 
+import android.content.Context;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,8 +29,6 @@ public class Utils
 
     public static class VHAMsg
     {
-
-
         public VHAMsg(int icon, String title, String detail)
         {
             this.icon = icon;
@@ -127,5 +129,38 @@ public class Utils
 
         return map;
     }
+
+    public static String getAssetsFileAsText(Context ctx, String fileName)
+    {
+        String ret = "";
+        InputStream is = null;
+        try
+        {
+            is = ctx.getAssets().open(fileName);
+            byte[] buf = new byte[is.available()];
+            is.read(buf);
+            is.close();
+            ret = new String(buf, "UTF-8");
+        }
+        catch (IOException e)
+        {
+            if (is != null)
+            {
+                try
+                {
+                    is.close();
+                }
+                catch (IOException e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+            e.printStackTrace();
+        }
+
+        return ret;
+    }
+
+
 
 }

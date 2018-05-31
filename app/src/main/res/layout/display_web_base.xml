@@ -8,20 +8,22 @@
     android:id="@+id/main_layout"
     tools:openDrawer="left">
 
-    <RelativeLayout android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="horizontal">
 
-
-        <WebView
+        <demo.projection.ford.com.projectiondemo.display.web.H5WebView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layerType="hardware"
-            android:id="@+id/wvContent"/>
+            android:id="@+id/wvContent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"/>
 
+    </LinearLayout>
 
-    </RelativeLayout>
-
-    <include layout="@layout/main_menu"/>
+    <include layout="@layout/input"/>
+    <include layout="@layout/menu"/>
 
 
 </android.support.v4.widget.DrawerLayout>

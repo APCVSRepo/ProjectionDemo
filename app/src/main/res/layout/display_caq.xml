@@ -21,6 +21,7 @@
 
     </RelativeLayout>
 
-    <include layout="@layout/main_menu"/>
+    <include layout="@layout/input"/>
+    <include layout="@layout/menu"/>
 
 </android.support.v4.widget.DrawerLayout>
